@@ -14,6 +14,7 @@ namespace battaglia_navale
 
     public partial class Form1 : Form
     {
+        int a;
       
         public Form1()
         {
@@ -29,6 +30,7 @@ namespace battaglia_navale
         }
         public nave[,] Popi(int grandezza)
         {
+            
             int a = 197, b = 170;
             nave[,] popi = new nave[grandezza, grandezza];
             for(int i=0;i < grandezza; i++) { 
@@ -43,12 +45,13 @@ namespace battaglia_navale
                 a = 197;
                 b = b + 20;
             }
+            
             return popi;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            int a = 0;
+            a = 0;
             string ugg;
             ugg = textBox1.Text;
             char[] pippo = ugg.ToCharArray();
@@ -65,7 +68,12 @@ namespace battaglia_navale
                 textBox1.Text = "tabella troppo grande ( < 100) ";
             }
             
-            nave [,] suca = Popi(a);
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            nave[,] suca = Popi(a);
         }
     }
 }
