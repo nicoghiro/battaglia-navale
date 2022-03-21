@@ -37,11 +37,52 @@ namespace battaglia_navale
             nave[,] popi = new nave[grandezza, grandezza];
             for(int i=0;i < grandezza; i++) {
                 for (int j = 0; j < grandezza; j++) {
-                    popi[i, j].bottone = new Button();
-            this.Controls.Add(popi[i,j].bottone);
-            popi[i,j].bottone.Location=new Point(a, b);
-            popi[i, j].bottone.Size = new Size(20, 20);
-                a = a + 20;
+                    if (i == 0 || j == 0)
+                    {
+                        if (i == 0)
+                        {
+                            if (i == 0 && j == 0)
+                            {
+                                a = a + 20;
+                            }
+                            else
+                            {
+                                popi[i, j].testo = new Label();
+                                this.Controls.Add(popi[i, j].testo);
+                                popi[i, j].testo.Location = new Point(a, b);
+                                popi[i, j].testo.Size = new Size(20, 20);
+                                string lab = Convert.ToString(j + 48);
+                                popi[i, j].testo.Text = lab;
+                                a = a + 20;
+                            }
+
+                        }
+                        if (j == 0)
+                        {
+                            if (i == 0 && j == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                popi[i, j].testo = new Label();
+                                this.Controls.Add(popi[i, j].testo);
+                                popi[i, j].testo.Location = new Point(a, b);
+                                popi[i, j].testo.Size = new Size(20, 20);
+                                string lab = Convert.ToString(i + 48);
+                                popi[i, j].testo.Text = lab;
+                                a = a + 20;
+                            }                            
+                        }
+                    }
+                    else
+                    {
+                        popi[i, j].bottone = new Button();
+                        this.Controls.Add(popi[i, j].bottone);
+                        popi[i, j].bottone.Location = new Point(a, b);
+                        popi[i, j].bottone.Size = new Size(20, 20);
+                        a = a + 20;
+                    }
                  
              }
                 a = 197;
@@ -66,11 +107,11 @@ namespace battaglia_navale
 
             if (pippo.Length < 2)
             {
-                a = ((int)pippo[0] - 48);
+                a = ((int)pippo[0] - 48)+1;
             }
             if (pippo.Length == 2)
             {
-                a = (((int)pippo[0] - 48) * 10) + (((int)pippo[1] - 48));
+                a = (((int)pippo[0] - 48) * 10) + (((int)pippo[1] - 48))+1 ;
             }
             if (pippo.Length > 3)
             {
@@ -98,4 +139,5 @@ namespace battaglia_navale
     public int lung;
     public bool ceck;
     public Button bottone;
+    public Label testo;
 }
