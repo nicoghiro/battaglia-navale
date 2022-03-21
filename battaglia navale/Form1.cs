@@ -32,7 +32,7 @@ namespace battaglia_navale
         }
         public nave[,] Popi(int grandezza)
         {
-           
+            char lab = '@';
             int a = 197, b = 170;
             nave[,] popi = new nave[grandezza, grandezza];
             for(int i=0;i < grandezza; i++) {
@@ -43,17 +43,18 @@ namespace battaglia_navale
                         {
                             if (i == 0 && j == 0)
                             {
-                                a = a + 20;
+                                a = a + 25;
                             }
                             else
                             {
                                 popi[i, j].testo = new Label();
                                 this.Controls.Add(popi[i, j].testo);
                                 popi[i, j].testo.Location = new Point(a, b);
-                                popi[i, j].testo.Size = new Size(20, 20);
-                                string lab = Convert.ToString(j + 48);
-                                popi[i, j].testo.Text = lab;
-                                a = a + 20;
+                                popi[i, j].testo.Size = new Size(25, 25);
+                                
+                                lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
+                                popi[i, j].testo.Text = Convert.ToString(lab);
+                                a = a + 25;
                             }
 
                         }
@@ -68,10 +69,10 @@ namespace battaglia_navale
                                 popi[i, j].testo = new Label();
                                 this.Controls.Add(popi[i, j].testo);
                                 popi[i, j].testo.Location = new Point(a, b);
-                                popi[i, j].testo.Size = new Size(20, 20);
-                                string lab = Convert.ToString(i + 48);
-                                popi[i, j].testo.Text = lab;
-                                a = a + 20;
+                                popi[i, j].testo.Size = new Size(25, 25);
+                                string vert = Convert.ToString(i );
+                                popi[i, j].testo.Text = vert;
+                                a = a + 25;
                             }                            
                         }
                     }
@@ -80,14 +81,15 @@ namespace battaglia_navale
                         popi[i, j].bottone = new Button();
                         this.Controls.Add(popi[i, j].bottone);
                         popi[i, j].bottone.Location = new Point(a, b);
-                        popi[i, j].bottone.Size = new Size(20, 20);
-                        a = a + 20;
+                        popi[i, j].bottone.Size = new Size(25,25);
+                        a = a + 25;
                     }
                  
              }
                 a = 197;
-                b = b + 20;
+                b = b + 25;
             }
+            
             return popi;
         }
 
@@ -107,21 +109,23 @@ namespace battaglia_navale
 
             if (pippo.Length < 2)
             {
-                a = ((int)pippo[0] - 48)+1;
+                a = ((int)pippo[0] - 48) + 1;
             }
             if (pippo.Length == 2)
             {
-                a = (((int)pippo[0] - 48) * 10) + (((int)pippo[1] - 48))+1 ;
+                a = (((int)pippo[0] - 48) * 10) + (((int)pippo[1] - 48)) + 1;
             }
-            if (pippo.Length > 3)
+            if (a > 27)
             {
-                textBox1.Text = "tabella troppo grande ( < 100) ";
+                textBox1.Text = "la grandezza deve essere minore di < 27";
             }
+            else { 
 
 
-            nave[,] suca = Popi(a);
+            nave[,] battaglione = Popi(a);
             textBox1.Hide();
             button1.Hide();
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
