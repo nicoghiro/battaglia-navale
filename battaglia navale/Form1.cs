@@ -23,6 +23,7 @@ namespace battaglia_navale
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
            
 
             
@@ -33,19 +34,18 @@ namespace battaglia_navale
             
             int a = 197, b = 170;
             nave[,] popi = new nave[grandezza, grandezza];
-            for(int i=0;i < grandezza; i++) { 
-            for(int j=0;j< grandezza; j++) { 
-            Button button1 = new Button();
-            this.Controls.Add(button1);
-            button1.Location=new Point(a, b);
-                    button1.Size = new Size(20, 20);
+            for(int i=0;i < grandezza; i++) {
+                for (int j = 0; j < grandezza; j++) {
+                    popi[i, j].bottone = new Button();
+            this.Controls.Add(popi[i,j].bottone);
+            popi[i,j].bottone.Location=new Point(a, b);
+            popi[i, j].bottone.Size = new Size(20, 20);
                 a = a + 20;
                  
              }
                 a = 197;
                 b = b + 20;
             }
-            
             return popi;
         }
 
@@ -85,4 +85,5 @@ namespace battaglia_navale
 {
     public int lung;
     public bool ceck;
+    public Button bottone;
 }
