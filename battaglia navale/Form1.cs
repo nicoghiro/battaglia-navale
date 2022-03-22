@@ -35,7 +35,11 @@ namespace battaglia_navale
             char lab = '@';
             int a = 197, b = 170;
             nave[,] popi = new nave[grandezza, grandezza];
-            for(int i=0;i < grandezza; i++) {
+            Label GIOCATORE = new Label();
+            this.Controls.Add(GIOCATORE);
+            GIOCATORE.Location = new Point(a + (15 * (grandezza / 2) + 30), b - 35);
+            GIOCATORE.Text = "GIOCATORE";
+            for (int i=0;i < grandezza; i++) {
                 for (int j = 0; j < grandezza; j++) {
                     if (i == 0 || j == 0)
                     {
@@ -123,6 +127,7 @@ namespace battaglia_navale
 
 
             nave[,] battaglione = Popi(a);
+            nave[,] nemico = nemici(a);
             textBox1.Hide();
             button1.Hide();
             }
@@ -131,6 +136,74 @@ namespace battaglia_navale
         private void label1_Click(object sender, EventArgs e)
         {
            
+        }
+        public nave[,] nemici(int grandezza)
+        {
+            char lab = '@';
+            int a = 797, b = 170;
+            Label NEMICO = new Label();
+            this.Controls.Add(NEMICO);
+            NEMICO.Location = new Point(a + (15 * (grandezza / 2)+45), b -35);
+            NEMICO.Text = "NEMICO";
+            nave[,] popi = new nave[grandezza, grandezza];
+            for (int i = 0; i < grandezza; i++)
+            {
+                for (int j = 0; j < grandezza; j++)
+                {
+                    if (i == 0 || j == 0)
+                    {
+                        if (i == 0)
+                        {
+                            if (i == 0 && j == 0)
+                            {
+                                a = a + 25;
+                            }
+                            else
+                            {
+                                popi[i, j].testo = new Label();
+                                this.Controls.Add(popi[i, j].testo);
+                                popi[i, j].testo.Location = new Point(a, b);
+                                popi[i, j].testo.Size = new Size(25, 25);
+
+                                lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
+                                popi[i, j].testo.Text = Convert.ToString(lab);
+                                a = a + 25;
+                            }
+
+                        }
+                        if (j == 0)
+                        {
+                            if (i == 0 && j == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                popi[i, j].testo = new Label();
+                                this.Controls.Add(popi[i, j].testo);
+                                popi[i, j].testo.Location = new Point(a, b);
+                                popi[i, j].testo.Size = new Size(25, 25);
+                                string vert = Convert.ToString(i);
+                                popi[i, j].testo.Text = vert;
+                                a = a + 25;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        popi[i, j].bottone = new Button();
+                        this.Controls.Add(popi[i, j].bottone);
+                        popi[i, j].bottone.Location = new Point(a, b);
+                        popi[i, j].bottone.Size = new Size(25, 25);
+                        a = a + 25;
+                    }
+
+                }
+                a = 797;
+                b = b + 25;
+            }
+
+            return popi;
         }
     }
 }
