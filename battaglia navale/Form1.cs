@@ -32,15 +32,15 @@ namespace battaglia_navale
 
            
         }
-        public nave[,] Popi(int grandezza, ref int c)
+        public nave[,] giocatore(int grandezza, ref int c)
         {
             
             char lab = '@';
-            int a = 453, b = 170;
-            nave[,] popi = new nave[grandezza, grandezza];
+            int x = 453, y = 170;
+            nave[,] grigliaP = new nave[grandezza, grandezza];
             Label GIOCATORE = new Label();
             this.Controls.Add(GIOCATORE);
-            GIOCATORE.Location = new Point(a + (15 * (grandezza / 2) + 30), b - 35);
+            GIOCATORE.Location = new Point(x + (15 * (grandezza / 2) + 30), y - 35);
             GIOCATORE.Text = "GIOCATORE";
             for (int i=0;i < grandezza; i++) {
                 for (int j = 0; j < grandezza; j++) {
@@ -50,19 +50,19 @@ namespace battaglia_navale
                         {
                             if (i == 0 && j == 0)
                             {
-                                a = a + 25;
+                                x = x + 25;
                                 c++;
                             }
                             else
                             {
-                                popi[i, j].testo = new Label();
-                                this.Controls.Add(popi[i, j].testo);
-                                popi[i, j].testo.Location = new Point(a, b);
-                                popi[i, j].testo.Size = new Size(25, 25);
+                                grigliaP[i, j].testo = new Label();
+                                this.Controls.Add(grigliaP[i, j].testo);
+                                grigliaP[i, j].testo.Location = new Point(x, y);
+                                grigliaP[i, j].testo.Size = new Size(25, 25);
                                 
                                 lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
-                                popi[i, j].testo.Text = Convert.ToString(lab);
-                                a = a + 25;
+                                grigliaP[i, j].testo.Text = Convert.ToString(lab);
+                                x = x + 25;
                                 
                             }
 
@@ -75,36 +75,36 @@ namespace battaglia_navale
                             }
                             else
                             {
-                                popi[i, j].testo = new Label();
-                                this.Controls.Add(popi[i, j].testo);
-                                popi[i, j].testo.Location = new Point(a, b);
-                                popi[i, j].testo.Size = new Size(25, 25);
+                                grigliaP[i, j].testo = new Label();
+                                this.Controls.Add(grigliaP[i, j].testo);
+                                grigliaP[i, j].testo.Location = new Point(x, y);
+                                grigliaP[i, j].testo.Size = new Size(25, 25);
                                 string vert = Convert.ToString(i );
-                                popi[i, j].testo.Text = vert;
-                                a = a + 25;
+                                grigliaP[i, j].testo.Text = vert;
+                                x = x + 25;
                                 
                             }                            
                         }
                     }
                     else
                     {
-                        popi[i, j].bottone = new Button();
-                        this.Controls.Add(popi[i, j].bottone);
-                        popi[i, j].bottone.Location = new Point(a, b);
-                        popi[i, j].bottone.Size = new Size(25,25);
+                        grigliaP[i, j].bottone = new Button();
+                        this.Controls.Add(grigliaP[i, j].bottone);
+                        grigliaP[i, j].bottone.Location = new Point(x, y);
+                        grigliaP[i, j].bottone.Size = new Size(25,25);
                         string sium = Convert.ToString(c);
-                        popi[i, j].bottone.Name = sium;
-                        popi[i, j].bottone.Text = sium;
-                        a = a + 25;
+                        grigliaP[i, j].bottone.Name = sium;
+                        grigliaP[i, j].bottone.Text = sium;
+                        x = x + 25;
                         c++;
                     }
                  
              }
-                a = 453;
-                b = b + 25;
+                x = 453;
+                y = y + 25;
             }
             
-            return popi;
+            return grigliaP;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -117,17 +117,19 @@ namespace battaglia_navale
         private void button1_Click(object sender, EventArgs e)
         {
             a = 0;
-            string ugg;
-            ugg = textBox1.Text;
-            char[] pippo = ugg.ToCharArray();
+            //testo è la variabile appoggio per conversione
+            string testo;
+            testo = textBox1.Text;
+            //conv è la variabile per trasformare in numero la dimensione inserita dall'utente (UwU)
+            char[] conv = testo.ToCharArray();
 
-            if (pippo.Length < 2)
+            if (conv.Length < 2)
             {
-                a = ((int)pippo[0] - 48) + 1;
+                a = ((int)conv[0] - 48) + 1;
             }
-            if (pippo.Length == 2)
+            if (conv.Length == 2)
             {
-                a = (((int)pippo[0] - 48) * 10) + (((int)pippo[1] - 48)) + 1;
+                a = (((int)conv[0] - 48) * 10) + (((int)conv[1] - 48)) + 1;
             }
             if (a > 27)
             {
@@ -135,8 +137,9 @@ namespace battaglia_navale
             }
             else {
 
-
-                nave[,] battaglione = Popi(a, ref d);
+                //giocatore è la stampa della griglia del giocatore (grigliaP)
+                nave[,] battaglione = giocatore(a, ref d);
+                //nemici è la stampa della griglia dei nemici (griglaN)
                 nave[,] nemico = nemici(a);
             
                 button1.Hide();
@@ -158,12 +161,12 @@ namespace battaglia_navale
         {
             int c = 0;
             char lab = '@';
-            int a = 1200, b = 170;
+            int x = 1200, y = 170;
             Label NEMICO = new Label();
             this.Controls.Add(NEMICO);
-            NEMICO.Location = new Point(a + (15 * (grandezza / 2)+45), b -35);
+            NEMICO.Location = new Point(x + (15 * (grandezza / 2)+45), y -35);
             NEMICO.Text = "NEMICO";
-            nave[,] grigliaP = new nave[grandezza, grandezza];
+            nave[,] grigliaN = new nave[grandezza, grandezza];
             for (int i = 0; i < grandezza; i++)
             {
                 for (int j = 0; j < grandezza; j++)
@@ -174,19 +177,19 @@ namespace battaglia_navale
                         {
                             if (i == 0 && j == 0)
                             {
-                                a = a + 25;
+                                x = x + 25;
                                 c++;
                             }
                             else
                             {
-                                grigliaP[i, j].testo = new Label();
-                                this.Controls.Add(grigliaP[i, j].testo);
-                                grigliaP[i, j].testo.Location = new Point(a, b);
-                                grigliaP[i, j].testo.Size = new Size(25, 25);
+                                grigliaN[i, j].testo = new Label();
+                                this.Controls.Add(grigliaN[i, j].testo);
+                                grigliaN[i, j].testo.Location = new Point(x, y);
+                                grigliaN[i, j].testo.Size = new Size(25, 25);
 
                                 lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
-                                grigliaP[i, j].testo.Text = Convert.ToString(lab);
-                                a = a + 25;
+                                grigliaN[i, j].testo.Text = Convert.ToString(lab);
+                                x = x + 25;
                             }
                             
                         }
@@ -198,36 +201,36 @@ namespace battaglia_navale
                             }
                             else
                             {
-                                grigliaP[i, j].testo = new Label();
-                                this.Controls.Add(grigliaP[i, j].testo);
-                                grigliaP[i, j].testo.Location = new Point(a, b);
-                                grigliaP[i, j].testo.Size = new Size(25, 25);
+                                grigliaN[i, j].testo = new Label();
+                                this.Controls.Add(grigliaN[i, j].testo);
+                                grigliaN[i, j].testo.Location = new Point(x, y);
+                                grigliaN[i, j].testo.Size = new Size(25, 25);
                                 string vert = Convert.ToString(i);
-                                grigliaP[i, j].testo.Text = vert;
-                                a = a + 25;
+                                grigliaN[i, j].testo.Text = vert;
+                                x = x + 25;
                             }
                         }
                     }
                     else
                     {
-                        grigliaP[i, j].bottone = new Button();
-                        this.Controls.Add(grigliaP[i, j].bottone);
-                        grigliaP[i, j].bottone.Location = new Point(a, b);
-                        grigliaP[i, j].bottone.Size = new Size(25, 25);
-                        string sium = Convert.ToString(c);
-                        grigliaP[i, j].bottone.Name = sium;
-                        grigliaP[i, j].bottone.Text = sium;
-                        a = a + 25;
+                        grigliaN[i, j].bottone = new Button();
+                        this.Controls.Add(grigliaN[i, j].bottone);
+                        grigliaN[i, j].bottone.Location = new Point(x, y);
+                        grigliaN[i, j].bottone.Size = new Size(25, 25);
+                        string butTxt = Convert.ToString(c);
+                        grigliaN[i, j].bottone.Name = butTxt;
+                        grigliaN[i, j].bottone.Text = butTxt;
+                        x = x + 25;
                         c++;
                         
                     }
 
                 }
-                a = 1200;
-                b = b + 25;
+                x = 1200;
+                y = y + 25;
             }
 
-            return grigliaP;
+            return grigliaN;
         }
       
 
@@ -241,7 +244,7 @@ namespace battaglia_navale
     public struct nave
 {
     public int lung;
-    public bool ceck;
+    public bool check;
     public Button bottone;
     public Label testo;
 }
