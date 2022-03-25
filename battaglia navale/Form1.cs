@@ -16,6 +16,7 @@ namespace battaglia_navale
     {
         string vuota;
         int a;
+        int d=0;
       
         public Form1()
         {
@@ -24,16 +25,18 @@ namespace battaglia_navale
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Location = new Point(907, 22);
             label1.Text = "inserisci quanto vuoi grande la tabella";
-            
+           
             
 
            
         }
-        public nave[,] Popi(int grandezza)
+        public nave[,] Popi(int grandezza, ref int c)
         {
+            
             char lab = '@';
-            int a = 197, b = 170;
+            int a = 453, b = 170;
             nave[,] popi = new nave[grandezza, grandezza];
             Label GIOCATORE = new Label();
             this.Controls.Add(GIOCATORE);
@@ -48,6 +51,7 @@ namespace battaglia_navale
                             if (i == 0 && j == 0)
                             {
                                 a = a + 25;
+                                c++;
                             }
                             else
                             {
@@ -59,6 +63,7 @@ namespace battaglia_navale
                                 lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
                                 popi[i, j].testo.Text = Convert.ToString(lab);
                                 a = a + 25;
+                                
                             }
 
                         }
@@ -77,6 +82,7 @@ namespace battaglia_navale
                                 string vert = Convert.ToString(i );
                                 popi[i, j].testo.Text = vert;
                                 a = a + 25;
+                                
                             }                            
                         }
                     }
@@ -86,11 +92,15 @@ namespace battaglia_navale
                         this.Controls.Add(popi[i, j].bottone);
                         popi[i, j].bottone.Location = new Point(a, b);
                         popi[i, j].bottone.Size = new Size(25,25);
+                        string sium = Convert.ToString(c);
+                        popi[i, j].bottone.Name = sium;
+                        popi[i, j].bottone.Text = sium;
                         a = a + 25;
+                        c++;
                     }
                  
              }
-                a = 197;
+                a = 453;
                 b = b + 25;
             }
             
@@ -123,14 +133,21 @@ namespace battaglia_navale
             {
                 textBox1.Text = "la grandezza deve essere minore di < 27";
             }
-            else { 
+            else {
 
 
-            nave[,] battaglione = Popi(a);
-            nave[,] nemico = nemici(a);
-            textBox1.Hide();
-            button1.Hide();
+                nave[,] battaglione = Popi(a, ref d);
+                nave[,] nemico = nemici(a);
+            
+                button1.Hide();
+                textBox1.Hide(); 
+                label1.Text = "Scegli quante barche inserire";
+                
+
+
+
             }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -139,13 +156,14 @@ namespace battaglia_navale
         }
         public nave[,] nemici(int grandezza)
         {
+            int c = 0;
             char lab = '@';
-            int a = 797, b = 170;
+            int a = 1200, b = 170;
             Label NEMICO = new Label();
             this.Controls.Add(NEMICO);
             NEMICO.Location = new Point(a + (15 * (grandezza / 2)+45), b -35);
             NEMICO.Text = "NEMICO";
-            nave[,] popi = new nave[grandezza, grandezza];
+            nave[,] grigliaP = new nave[grandezza, grandezza];
             for (int i = 0; i < grandezza; i++)
             {
                 for (int j = 0; j < grandezza; j++)
@@ -157,19 +175,20 @@ namespace battaglia_navale
                             if (i == 0 && j == 0)
                             {
                                 a = a + 25;
+                                c++;
                             }
                             else
                             {
-                                popi[i, j].testo = new Label();
-                                this.Controls.Add(popi[i, j].testo);
-                                popi[i, j].testo.Location = new Point(a, b);
-                                popi[i, j].testo.Size = new Size(25, 25);
+                                grigliaP[i, j].testo = new Label();
+                                this.Controls.Add(grigliaP[i, j].testo);
+                                grigliaP[i, j].testo.Location = new Point(a, b);
+                                grigliaP[i, j].testo.Size = new Size(25, 25);
 
                                 lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
-                                popi[i, j].testo.Text = Convert.ToString(lab);
+                                grigliaP[i, j].testo.Text = Convert.ToString(lab);
                                 a = a + 25;
                             }
-
+                            
                         }
                         if (j == 0)
                         {
@@ -179,32 +198,40 @@ namespace battaglia_navale
                             }
                             else
                             {
-                                popi[i, j].testo = new Label();
-                                this.Controls.Add(popi[i, j].testo);
-                                popi[i, j].testo.Location = new Point(a, b);
-                                popi[i, j].testo.Size = new Size(25, 25);
+                                grigliaP[i, j].testo = new Label();
+                                this.Controls.Add(grigliaP[i, j].testo);
+                                grigliaP[i, j].testo.Location = new Point(a, b);
+                                grigliaP[i, j].testo.Size = new Size(25, 25);
                                 string vert = Convert.ToString(i);
-                                popi[i, j].testo.Text = vert;
+                                grigliaP[i, j].testo.Text = vert;
                                 a = a + 25;
                             }
                         }
                     }
                     else
                     {
-                        popi[i, j].bottone = new Button();
-                        this.Controls.Add(popi[i, j].bottone);
-                        popi[i, j].bottone.Location = new Point(a, b);
-                        popi[i, j].bottone.Size = new Size(25, 25);
+                        grigliaP[i, j].bottone = new Button();
+                        this.Controls.Add(grigliaP[i, j].bottone);
+                        grigliaP[i, j].bottone.Location = new Point(a, b);
+                        grigliaP[i, j].bottone.Size = new Size(25, 25);
+                        string sium = Convert.ToString(c);
+                        grigliaP[i, j].bottone.Name = sium;
+                        grigliaP[i, j].bottone.Text = sium;
                         a = a + 25;
+                        c++;
+                        
                     }
 
                 }
-                a = 797;
+                a = 1200;
                 b = b + 25;
             }
 
-            return popi;
+            return grigliaP;
         }
+      
+
+       
     }
 }
 
