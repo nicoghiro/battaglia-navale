@@ -14,6 +14,9 @@ namespace battaglia_navale
 
     public partial class Form1 : Form
     {
+
+
+        nave[,] battaglione;
         string vuota;
         int a;
         int d=0;
@@ -139,12 +142,12 @@ namespace battaglia_navale
             else {
 
                 //giocatore è la stampa della griglia del giocatore (grigliaP)
-                nave[,] battaglione = giocatore(a, ref d);
+                battaglione = giocatore(a, ref d);
                 //nemici è la stampa della griglia dei nemici (griglaN)
                 nave[,] nemico = nemici(a);
             
                 button1.Hide();
-                textBox1.Hide(); 
+                
                 label1.Text = "Scegli quante barche inserire";
                 
 
@@ -235,10 +238,28 @@ namespace battaglia_navale
         }
         public void buttonp_Click(object sender, EventArgs e)
         {
-            textBox2.Text = Convert.ToString(sender);
+            Button button = sender as Button;
+            for (int i = 0; i < battaglione.Length; i++)
+            {
+                for (int j = 0; j < battaglione.Length; j++)
+                {
+                   
+                    if (button.Name == battaglione[2, 2].bottone.Name)
+                    {
+                        battaglione[2, 2].fase = 1;
+                    }
                 }
+            }
 
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if( battaglione[2,2].fase==1)
+            {
+                textBox1.Text = "popi";
+            }
+        }
     }
 }
 
@@ -248,7 +269,8 @@ namespace battaglia_navale
     public struct nave
 {
     public int lung;
-    public bool check;
+    public int fase;
+    //fase 1 = vuota ; fase 2 = nave presente ; fase 3 = fase distrutta
     public Button bottone;
     public Label testo;
 }
