@@ -92,9 +92,10 @@ namespace battaglia_navale
                         this.Controls.Add(grigliaP[i, j].bottone);
                         grigliaP[i, j].bottone.Location = new Point(x, y);
                         grigliaP[i, j].bottone.Size = new Size(25,25);
-                        string sium = Convert.ToString(c);
-                        grigliaP[i, j].bottone.Name = sium;
-                        grigliaP[i, j].bottone.Text = sium;
+                        string cordx = Convert.ToString(i);
+                        string cordy = Convert.ToString(j);
+                        grigliaP[i, j].bottone.Name = i + "-" + j;
+                        grigliaP[i,j].bottone.Click += new EventHandler(buttonp_Click);
                         x = x + 25;
                         c++;
                     }
@@ -186,7 +187,6 @@ namespace battaglia_navale
                                 this.Controls.Add(grigliaN[i, j].testo);
                                 grigliaN[i, j].testo.Location = new Point(x, y);
                                 grigliaN[i, j].testo.Size = new Size(25, 25);
-
                                 lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
                                 grigliaN[i, j].testo.Text = Convert.ToString(lab);
                                 x = x + 25;
@@ -217,9 +217,10 @@ namespace battaglia_navale
                         this.Controls.Add(grigliaN[i, j].bottone);
                         grigliaN[i, j].bottone.Location = new Point(x, y);
                         grigliaN[i, j].bottone.Size = new Size(25, 25);
-                        string butTxt = Convert.ToString(c);
-                        grigliaN[i, j].bottone.Name = butTxt;
-                        grigliaN[i, j].bottone.Text = butTxt;
+                        string cordx = Convert.ToString(i);
+                        string cordy = Convert.ToString(j);
+                        grigliaN[i, j].bottone.Name = i+"-"+j;
+
                         x = x + 25;
                         c++;
                         
@@ -232,9 +233,12 @@ namespace battaglia_navale
 
             return grigliaN;
         }
-      
+        public void buttonp_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = Convert.ToString(sender);
+                }
 
-       
+
     }
 }
 
