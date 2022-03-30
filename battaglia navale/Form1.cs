@@ -238,26 +238,44 @@ namespace battaglia_navale
         }
         public void buttonp_Click(object sender, EventArgs e)
         {
+            /*
+            Button button = (Button)sender;
+            button.
+            */
+            
             Button button = sender as Button;
-            for (int i = 0; i < battaglione.Length; i++)
+            for (int i = 1; i < a; i++)
             {
-                for (int j = 0; j < battaglione.Length; j++)
+                for (int j = 1; j < a; j++)
                 {
-                   
-                    if (button.Name == battaglione[2, 2].bottone.Name)
+
+                    if (button.Name == battaglione[i, j].bottone.Name)
                     {
-                        battaglione[2, 2].fase = 1;
+                        battaglione[i, j].fase = 1;
                     }
                 }
+            
             }
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if( battaglione[2,2].fase==1)
+            for (int i = 1; i < a; i++)
             {
-                textBox1.Text = "popi";
+                for (int j = 1; j < a; j++)
+                {
+
+                    if (1 == battaglione[i, j].fase)
+                    {
+                        battaglione[i, j].bottone.BackColor = Color.Blue;
+                    }
+                    if (0 == battaglione[i, j].fase)
+                    {
+                        battaglione[i, j].bottone.BackColor = Color.Green;
+                    }
+                }
+
             }
         }
     }
