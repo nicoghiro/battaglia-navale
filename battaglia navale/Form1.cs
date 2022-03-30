@@ -261,22 +261,7 @@ namespace battaglia_navale
 
         private void button2_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < a; i++)
-            {
-                for (int j = 1; j < a; j++)
-                {
 
-                    if (1 == battaglione[i, j].fase)
-                    {
-                        battaglione[i, j].bottone.BackColor = Color.Blue;
-                    }
-                    if (0 == battaglione[i, j].fase)
-                    {
-                        battaglione[i, j].bottone.BackColor = Color.Green;
-                    }
-                }
-
-            }
         }
     }
 }
