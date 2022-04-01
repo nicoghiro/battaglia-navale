@@ -14,12 +14,13 @@ namespace battaglia_navale
 
     public partial class Form1 : Form
     {
+        nave[,] nemico;
         int contatore=0;
         int gioco = 0;
         nave[,] battaglione;
-        string vuota;
+        
         int a;
-        int d=0;
+       
       
         public Form1()
         {
@@ -35,16 +36,24 @@ namespace battaglia_navale
 
            
         }
-        public nave[,] giocatore(int grandezza, ref int c)
+        public nave[,] creazione(int grandezza,string player,int posx,int posy)
         {
             
             char lab = '@';
-            int x = 453, y = 170;
-            nave[,] grigliaP = new nave[grandezza, grandezza];
+            int x = posx, y = posy;
+            nave[,] griglia = new nave[grandezza, grandezza];
+            if(player == "giocatore") { 
             Label GIOCATORE = new Label();
             this.Controls.Add(GIOCATORE);
             GIOCATORE.Location = new Point(x + (15 * (grandezza / 2) + 30), y - 35);
             GIOCATORE.Text = "GIOCATORE";
+            }
+            if(player == "bot") {
+                    Label bot = new Label();
+                    this.Controls.Add(bot);
+                    bot.Location = new Point(x + (15 * (grandezza / 2) + 30), y - 35);
+                    bot.Text = "NEMICO";
+                }
             for (int i=0;i < grandezza; i++) {
                 for (int j = 0; j < grandezza; j++) {
                     if (i == 0 || j == 0)
@@ -54,17 +63,17 @@ namespace battaglia_navale
                             if (i == 0 && j == 0)
                             {
                                 x = x + 25;
-                                c++;
+                                
                             }
                             else
                             {
-                                grigliaP[i, j].testo = new Label();
-                                this.Controls.Add(grigliaP[i, j].testo);
-                                grigliaP[i, j].testo.Location = new Point(x, y);
-                                grigliaP[i, j].testo.Size = new Size(25, 25);
+                                griglia[i, j].testo = new Label();
+                                this.Controls.Add(griglia[i, j].testo);
+                                griglia[i, j].testo.Location = new Point(x, y);
+                                griglia[i, j].testo.Size = new Size(25, 25);
                                 
                                 lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
-                                grigliaP[i, j].testo.Text = Convert.ToString(lab);
+                                griglia[i, j].testo.Text = Convert.ToString(lab);
                                 x = x + 25;
                                 
                             }
@@ -78,12 +87,12 @@ namespace battaglia_navale
                             }
                             else
                             {
-                                grigliaP[i, j].testo = new Label();
-                                this.Controls.Add(grigliaP[i, j].testo);
-                                grigliaP[i, j].testo.Location = new Point(x, y);
-                                grigliaP[i, j].testo.Size = new Size(25, 25);
+                                griglia[i, j].testo = new Label();
+                                this.Controls.Add(griglia[i, j].testo);
+                                griglia[i, j].testo.Location = new Point(x, y);
+                                griglia[i, j].testo.Size = new Size(25, 25);
                                 string vert = Convert.ToString(i );
-                                grigliaP[i, j].testo.Text = vert;
+                                griglia[i, j].testo.Text = vert;
                                 x = x + 25;
                                 
                             }                            
@@ -91,24 +100,30 @@ namespace battaglia_navale
                     }
                     else
                     {
-                        grigliaP[i, j].bottone = new Button();
-                        this.Controls.Add(grigliaP[i, j].bottone);
-                        grigliaP[i, j].bottone.Location = new Point(x, y);
-                        grigliaP[i, j].bottone.Size = new Size(25,25);
+                        griglia[i, j].bottone = new Button();
+                        this.Controls.Add(griglia[i, j].bottone);
+                        griglia[i, j].bottone.Location = new Point(x, y);
+                        griglia[i, j].bottone.Size = new Size(25,25);
                         string cordx = Convert.ToString(i);
                         string cordy = Convert.ToString(j);
-                        grigliaP[i, j].bottone.Name = i + "-" + j;
-                        grigliaP[i,j].bottone.Click += new EventHandler(buttonp_Click);
+                        griglia[i, j].bottone.Name = i + "-" + j;
+                        if(player == "giocatore") { 
+                        griglia[i,j].bottone.Click += new EventHandler(buttonp_Click);
                         x = x + 25;
-                        c++;
+                        }
+                        else { 
+                                 griglia[i, j].bottone.Click += new EventHandler(buttonn_Click);
+                        x = x + 25;
+                        }
+                        
                     }
                  
              }
-                x = 453;
+                x = posx;
                 y = y + 25;
             }
             button2.Show();
-            return grigliaP;
+            return griglia;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -142,9 +157,9 @@ namespace battaglia_navale
             else {
 
                 //giocatore è la stampa della griglia del giocatore (grigliaP)
-                battaglione = giocatore(a, ref d);
+                battaglione = creazione(a,"giocatore",400,170);
                 //nemici è la stampa della griglia dei nemici (griglaN)
-                nave[,] nemico = nemici(a);
+                nemico = creazione(a,"bot",1200,170);
             
                 button1.Hide();
                 
@@ -161,81 +176,7 @@ namespace battaglia_navale
         {
            
         }
-        public nave[,] nemici(int grandezza)
-        {
-            int c = 0;
-            char lab = '@';
-            int x = 1200, y = 170;
-            Label NEMICO = new Label();
-            this.Controls.Add(NEMICO);
-            NEMICO.Location = new Point(x + (15 * (grandezza / 2)+45), y -35);
-            NEMICO.Text = "NEMICO";
-            nave[,] grigliaN = new nave[grandezza, grandezza];
-            for (int i = 0; i < grandezza; i++)
-            {
-                for (int j = 0; j < grandezza; j++)
-                {
-                    if (i == 0 || j == 0)
-                    {
-                        if (i == 0)
-                        {
-                            if (i == 0 && j == 0)
-                            {
-                                x = x + 25;
-                                c++;
-                            }
-                            else
-                            {
-                                grigliaN[i, j].testo = new Label();
-                                this.Controls.Add(grigliaN[i, j].testo);
-                                grigliaN[i, j].testo.Location = new Point(x, y);
-                                grigliaN[i, j].testo.Size = new Size(25, 25);
-                                lab = Convert.ToChar(Convert.ToInt32(lab) + 1);
-                                grigliaN[i, j].testo.Text = Convert.ToString(lab);
-                                x = x + 25;
-                            }
-                            
-                        }
-                        if (j == 0)
-                        {
-                            if (i == 0 && j == 0)
-                            {
-
-                            }
-                            else
-                            {
-                                grigliaN[i, j].testo = new Label();
-                                this.Controls.Add(grigliaN[i, j].testo);
-                                grigliaN[i, j].testo.Location = new Point(x, y);
-                                grigliaN[i, j].testo.Size = new Size(25, 25);
-                                string vert = Convert.ToString(i);
-                                grigliaN[i, j].testo.Text = vert;
-                                x = x + 25;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        grigliaN[i, j].bottone = new Button();
-                        this.Controls.Add(grigliaN[i, j].bottone);
-                        grigliaN[i, j].bottone.Location = new Point(x, y);
-                        grigliaN[i, j].bottone.Size = new Size(25, 25);
-                        string cordx = Convert.ToString(i);
-                        string cordy = Convert.ToString(j);
-                        grigliaN[i, j].bottone.Name = i+"-"+j;
-
-                        x = x + 25;
-                        c++;
-                        
-                    }
-
-                }
-                x = 1200;
-                y = y + 25;
-            }
-
-            return grigliaN;
-        }
+       
         public void buttonp_Click(object sender, EventArgs e)
         {
             
@@ -267,10 +208,33 @@ namespace battaglia_navale
             }
 
         }
+        public void buttonn_Click(object sender, EventArgs e)
+        {
+            int salvax = 0;
+            int salvay = 0;
 
-        
+            Button button = sender as Button;
+            for (int i = 1; i < a; i++)
+            {
+                for (int j = 1; j < a; j++)
+                {
 
-        private void button2_Click_1(object sender, EventArgs e)
+                    if (button.Name == nemico[i, j].bottone.Name)
+                    {
+                        salvax = i;
+                        salvay = j;
+                        nemico[salvax, salvay].bottone.BackColor = Color.Green;
+                        
+
+                    }
+                }
+
+            }
+        }
+
+
+
+            private void button2_Click_1(object sender, EventArgs e)
         {
             gioco = 1;
             button2.Hide();
