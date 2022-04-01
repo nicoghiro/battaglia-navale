@@ -14,8 +14,8 @@ namespace battaglia_navale
 
     public partial class Form1 : Form
     {
-
-
+        int contatore=0;
+        int gioco = 0;
         nave[,] battaglione;
         string vuota;
         int a;
@@ -30,7 +30,7 @@ namespace battaglia_navale
         {
             label1.Location = new Point(907, 22);
             label1.Text = "inserisci quanto vuoi grande la tabella";
-           
+            button2.Hide();
             
 
            
@@ -107,7 +107,7 @@ namespace battaglia_navale
                 x = 453;
                 y = y + 25;
             }
-            
+            button2.Show();
             return grigliaP;
         }
 
@@ -238,30 +238,42 @@ namespace battaglia_navale
         }
         public void buttonp_Click(object sender, EventArgs e)
         {
-            /*
-            Button button = (Button)sender;
-            button.
-            */
+            
+            int salvax=0;
+            int salvay=0;
             
             Button button = sender as Button;
             for (int i = 1; i < a; i++)
-            {
+            {//ciao Uwu
                 for (int j = 1; j < a; j++)
                 {
 
                     if (button.Name == battaglione[i, j].bottone.Name)
                     {
-                        battaglione[i, j].fase = 1;
+                        
+                        salvax =i;
+                        salvay = j;
+
                     }
                 }
             
             }
+            if (gioco <1)
+            {
+                battaglione[salvax, salvay].fase = 1;
+                battaglione[salvax, salvay].bottone.BackColor = Color.Pink;
+                contatore = contatore + 1; 
+               
+            }
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
+        
 
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            gioco = 1;
+            button2.Hide();
         }
     }
 }
@@ -271,7 +283,7 @@ namespace battaglia_navale
 
     public struct nave
 {
-    public int lung;
+    
     public int fase;
     //fase 1 = vuota ; fase 2 = nave presente ; fase 3 = fase distrutta
     public Button bottone;
