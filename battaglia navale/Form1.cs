@@ -14,6 +14,7 @@ namespace battaglia_navale
 
     public partial class Form1 : Form
     {
+        Random sus = new Random();
         nave[,] nemico;
         int contatore=0;
         int gioco = 0;
@@ -104,6 +105,7 @@ namespace battaglia_navale
                         this.Controls.Add(griglia[i, j].bottone);
                         griglia[i, j].bottone.Location = new Point(x, y);
                         griglia[i, j].bottone.Size = new Size(25,25);
+                        griglia[i, j].fase = 0;
                         string cordx = Convert.ToString(i);
                         string cordy = Convert.ToString(j);
                         griglia[i, j].bottone.Name = i + "-" + j;
@@ -201,9 +203,23 @@ namespace battaglia_navale
             }
             if (gioco <1)
             {
+                int crea = 0;
                 battaglione[salvax, salvay].fase = 1;
                 battaglione[salvax, salvay].bottone.BackColor = Color.Pink;
-                contatore = contatore + 1; 
+                contatore = contatore + 1;
+                while (crea == 0)
+                {
+                    int y = a  + 1;
+                    int navnemx = sus.Next(1,y);
+                    int navnemy = sus.Next(1, y);
+                    if (nemico[navnemx, navnemy].fase == 0)
+                    {
+                        nemico[navnemx, navnemy].fase = 1;
+                        crea = crea + 1;
+                        nemico[navnemx, navnemy].bottone.BackColor = Color.LightBlue;
+                    }
+                
+                }
                
             }
 
@@ -233,7 +249,7 @@ namespace battaglia_navale
         }
 
 
-
+        //UwUwUwUwUwU
             private void button2_Click_1(object sender, EventArgs e)
         {
             gioco = 1;
