@@ -16,7 +16,7 @@ namespace battaglia_navale
     {
         Random sus = new Random();
         nave[,] nemico;
-        int contatore=0;
+        int contatore=0, contatoreG=0;
         int gioco = 0;
         nave[,] battaglione;
         
@@ -94,6 +94,7 @@ namespace battaglia_navale
                                 griglia[i, j].testo.Size = new Size(25, 25);
                                 string vert = Convert.ToString(i );
                                 griglia[i, j].testo.Text = vert;
+
                                 x = x + 25;
                                 
                             }                            
@@ -105,6 +106,7 @@ namespace battaglia_navale
                         this.Controls.Add(griglia[i, j].bottone);
                         griglia[i, j].bottone.Location = new Point(x, y);
                         griglia[i, j].bottone.Size = new Size(25,25);
+                        griglia[i, j].contaclick = 0;
                         griglia[i, j].fase = 0;
                         string cordx = Convert.ToString(i);
                         string cordy = Convert.ToString(j);
@@ -201,20 +203,22 @@ namespace battaglia_navale
                 }
             
             }
-            if (gioco <1)
+            if (gioco <1 && battaglione[salvax, salvay].fase == 0)
             {
+                
                 int crea = 0;
                 battaglione[salvax, salvay].fase = 1;
                 battaglione[salvax, salvay].bottone.BackColor = Color.Pink;
-                contatore = contatore + 1;
+                contatoreG++;
                 while (crea == 0)
                 {
                     int y = a  + 1;
-                    int navnemx = sus.Next(1,y);
-                    int navnemy = sus.Next(1, y);
+                    int navnemx = sus.Next(1,y-1);
+                    int navnemy = sus.Next(1, y-1);
                     if (nemico[navnemx, navnemy].fase == 0)
                     {
                         nemico[navnemx, navnemy].fase = 1;
+                        contatore++;
                         crea = crea + 1;
                         nemico[navnemx, navnemy].bottone.BackColor = Color.LightBlue;
                     }
@@ -239,22 +243,84 @@ namespace battaglia_navale
                     {
                         salvax = i;
                         salvay = j;
-                        nemico[salvax, salvay].bottone.BackColor = Color.Green;
+                        
                         
 
                     }
                 }
 
             }
+            if (gioco == 1 && nemico[salvax, salvay].fase==1 || nemico[salvax, salvay].fase == 0 && nemico[salvax, salvay].contaclick<1)
+            {
+                nemico[salvax, salvay].contaclick++;
+
+
+                int crea = 0;
+                if(nemico[salvax, salvay].fase == 1) { 
+                nemico[salvax, salvay].fase = 2;
+                nemico[salvax, salvay].bottone.BackColor = Color.Black;
+                contatoreG--;}
+                else
+                {
+                    nemico[salvax, salvay].bottone.BackColor = Color.Orange;
+                }
+                while (crea == 0)
+                {
+                    int y = a + 1;
+                    int navnemx = sus.Next(1, y - 1);
+                    int navnemy = sus.Next(1, y - 1);
+                    if (battaglione[navnemx, navnemy].fase == 0)
+                    {
+                        
+                        
+                        crea = crea + 1;
+                        battaglione[navnemx, navnemy].bottone.BackColor = Color.Yellow;
+                    }
+                    if (battaglione[navnemx, navnemy].fase == 1)
+                    {
+
+                        battaglione[navnemx, navnemy].fase = 2;
+                        crea = crea + 1;
+                        battaglione[navnemx, navnemy].bottone.BackColor = Color.Purple;
+                    }
+                    if (battaglione[navnemx, navnemy].fase == 2)
+                    {
+
+                        
+                        crea = crea + 1;
+                       
+                    }
+
+                }
+
+
+            }
+            else if (nemico[salvax, salvay].fase == 2) { 
+            }
+            if (contatoreG == 0)
+            {
+                this.Hide();
+                Form vittoria = new Form();
+                vittoria.ShowDialog();
+                this.Close();
+            }
+            if (contatore == 0)
+            {
+                this.Hide();
+                Form perso = new Form();
+                perso.ShowDialog();
+                this.Close();
+            }
         }
 
 
         //UwUwUwUwUwU
             private void button2_Click_1(object sender, EventArgs e)
-        {
-            gioco = 1;
-            button2.Hide();
-        }
+            { 
+                gioco = 1;
+                button2.Hide();
+                label1.Text = "comincia la battaglia, scegli dove sganciare le bombe";
+            }
     }
 }
 
@@ -263,9 +329,9 @@ namespace battaglia_navale
 
     public struct nave
 {
-    
+    public int contaclick;   
     public int fase;
-    //fase 1 = vuota ; fase 2 = nave presente ; fase 3 = fase distrutta
+    //fase 0 = vuota ; fase 1 = nave presente ; fase 2 = fase distrutta
     public Button bottone;
     public Label testo;
 }
