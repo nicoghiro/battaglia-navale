@@ -250,7 +250,7 @@ namespace battaglia_navale
                 }
 
             }
-            if (gioco == 1 && nemico[salvax, salvay].fase==1 || nemico[salvax, salvay].fase == 0 && nemico[salvax, salvay].contaclick<1)
+            if (gioco == 1 && nemico[salvax, salvay].fase==1 || nemico[salvax, salvay].fase == 0 )
             {
                 nemico[salvax, salvay].contaclick++;
 
@@ -278,7 +278,7 @@ namespace battaglia_navale
                     }
                     if (battaglione[navnemx, navnemy].fase == 1)
                     {
-
+                        contatore--;
                         battaglione[navnemx, navnemy].fase = 2;
                         crea = crea + 1;
                         battaglione[navnemx, navnemy].bottone.BackColor = Color.Purple;
@@ -297,6 +297,7 @@ namespace battaglia_navale
             }
             else if (nemico[salvax, salvay].fase == 2) { 
             }
+            if(gioco ==1) { 
             if (contatoreG == 0)
             {
                 this.Hide();
@@ -311,15 +312,24 @@ namespace battaglia_navale
                 perso.ShowDialog();
                 this.Close();
             }
+            }
         }
 
 
         //UwUwUwUwUwU
             private void button2_Click_1(object sender, EventArgs e)
-            { 
+            {
+            if (contatore != 0)
+            {
                 gioco = 1;
                 button2.Hide();
                 label1.Text = "comincia la battaglia, scegli dove sganciare le bombe";
+
+            }
+            if (contatore == 0)
+            {
+                MessageBox.Show("coglione scegli almeno una barca e non essere come mensah");
+            }
             }
     }
 }
