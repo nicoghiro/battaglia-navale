@@ -20,20 +20,19 @@ namespace battaglia_navale
         int gioco = 0;
         nave[,] battaglione;
         
-        int a ;
+        int a;
        
       
         public Form1()
         {
-           
-          
+            InitializeComponent();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             label1.Location = new Point(907, 22);
             label1.Text = "inserisci quanto vuoi grande la tabella";
-            
+            button2.Hide();
             
 
            
@@ -127,7 +126,7 @@ namespace battaglia_navale
                 x = posx;
                 y = y + 25;
             }
-            
+            button2.Show();
             return griglia;
         }
 
@@ -140,7 +139,6 @@ namespace battaglia_navale
 
         private void button1_Click(object sender, EventArgs e)
         {
-
             a = 0;
             //testo è la variabile appoggio per conversione
             string testo;
@@ -160,13 +158,22 @@ namespace battaglia_navale
             {
                 textBox1.Text = "la grandezza deve essere minore di < 27";
             }
-            else
-            {
+            else {
+
                 //giocatore è la stampa della griglia del giocatore (grigliaP)
-                battaglione = creazione(a, "giocatore", 400, 170);
+                battaglione = creazione(a,"giocatore",400,170);
                 //nemici è la stampa della griglia dei nemici (griglaN)
-                nemico = creazione(a, "bot", 1200, 170);
+                nemico = creazione(a,"bot",1200,170);
+            
+                button1.Hide();
+                
+                label1.Text = "Scegli quante barche inserire";
+                
+
+
+
             }
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -205,7 +212,7 @@ namespace battaglia_navale
                 contatoreG++;
                 while (crea == 0)
                 {
-                    int y = a + 1;
+                    int y = a  + 1;
                     int navnemx = sus.Next(1,y-1);
                     int navnemy = sus.Next(1, y-1);
                     if (nemico[navnemx, navnemy].fase == 0)
@@ -243,15 +250,7 @@ namespace battaglia_navale
                 }
 
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
             if (gioco == 1 && nemico[salvax, salvay].fase==1 || gioco == 1 &&  nemico[salvax, salvay].fase == 0 )
-=======
-            if (gioco == 1 && nemico[salvax, salvay].fase==1 || nemico[salvax, salvay].fase == 0 && nemico[salvax, salvay].contaclick<1)
->>>>>>> parent of 50f9c05 (sistemare bottoni che a volte non vanno)
-=======
-            if (gioco == 1 && nemico[salvax, salvay].fase==1 || nemico[salvax, salvay].fase == 0 && nemico[salvax, salvay].contaclick<1)
->>>>>>> parent of 50f9c05 (sistemare bottoni che a volte non vanno)
             {
                 nemico[salvax, salvay].contaclick++;
 
@@ -263,19 +262,18 @@ namespace battaglia_navale
                 contatoreG--;}
                 else
                 {
-                    nemico[salvax, salvay].fase = 3;
                     nemico[salvax, salvay].bottone.BackColor = Color.Orange;
                 }
                 while (crea == 0)
                 {
                     int y = a + 1;
-                    int navnemx = sus.Next(1, y -1);
-                    int navnemy = sus.Next(1, y -1 );
+                    int navnemx = sus.Next(1, y - 1);
+                    int navnemy = sus.Next(1, y - 1);
                     if (battaglione[navnemx, navnemy].fase == 0)
                     {
-                        battaglione[navnemx, navnemy].fase = 3;
-
-                       crea = crea + 1;
+                        
+                        
+                        crea = crea + 1;
                         battaglione[navnemx, navnemy].bottone.BackColor = Color.Yellow;
                     }
                     if (battaglione[navnemx, navnemy].fase == 1)
@@ -285,7 +283,13 @@ namespace battaglia_navale
                         crea = crea + 1;
                         battaglione[navnemx, navnemy].bottone.BackColor = Color.Purple;
                     }
-                    
+                    if (battaglione[navnemx, navnemy].fase == 2)
+                    {
+
+                        
+                        crea = crea + 1;
+                       
+                    }
 
                 }
 
@@ -327,7 +331,8 @@ namespace battaglia_navale
 {
     public int contaclick;   
     public int fase;
-    //fase 0 = vuota ; fase 1 = nave presente ; fase 2 = fase distrutta ; fase 3 = territorio colpito ma senza nave
+    //fase 0 = vuota ; fase 1 = nave presente ; fase 2 = fase distrutta
     public Button bottone;
     public Label testo;
 }
+//p
