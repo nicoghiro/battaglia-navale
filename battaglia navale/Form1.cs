@@ -328,8 +328,7 @@ namespace battaglia_navale
 {
     public int contaclick;   
     public int fase;
-    //fase 0 = vuota ; fase 1 = nave presente ; fase 2 = fase distrutta
+    //fase 0 = vuota ; fase 1 = nave presente ; fase 2 = fase distrutta ; fase 3 = nave attaccata ma non colpita;
     public Button bottone;
     public Label testo;
 }
-//p
