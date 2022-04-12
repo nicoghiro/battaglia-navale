@@ -250,7 +250,7 @@ namespace battaglia_navale
                 }
 
             }
-            if (gioco == 1 && nemico[salvax, salvay].fase==1 || gioco == 1 &&  nemico[salvax, salvay].fase == 0 )
+            if (gioco == 1 && nemico[salvax, salvay].fase == 1 || gioco == 1 && nemico[salvax, salvay].fase == 0 && nemico[salvax, salvay].contaclick < 1)
             {
                 nemico[salvax, salvay].contaclick++;
 
@@ -264,6 +264,7 @@ namespace battaglia_navale
                 {
                     nemico[salvax, salvay].bottone.BackColor = Color.Orange;
                 }
+                
                 while (crea == 0)
                 {
                     int y = a + 1;
@@ -271,40 +272,36 @@ namespace battaglia_navale
                     int navnemy = sus.Next(1, y - 1);
                     if (battaglione[navnemx, navnemy].fase == 0)
                     {
-                        
-                        
+                        battaglione[navnemx, navnemy].contaclick++;
+                        battaglione[navnemx, navnemy].fase = 3;
                         crea = crea + 1;
                         battaglione[navnemx, navnemy].bottone.BackColor = Color.Yellow;
                     }
                     if (battaglione[navnemx, navnemy].fase == 1)
                     {
-
+                        battaglione[navnemx, navnemy].contaclick++;
                         battaglione[navnemx, navnemy].fase = 2;
                         crea = crea + 1;
                         battaglione[navnemx, navnemy].bottone.BackColor = Color.Purple;
+                        contatoreG--;
                     }
-                    if (battaglione[navnemx, navnemy].fase == 2)
-                    {
+                    
 
-                        
-                        crea = crea + 1;
-                       
-                    }
 
                 }
 
 
             }
-            else if (nemico[salvax, salvay].fase == 2) { 
+            else if (nemico[salvax, salvay].fase == 2 ) { 
             }
-            if (contatoreG == 0)
+            if (contatoreG == 0 && gioco != 0)
             {
                 this.Hide();
                 Form vittoria = new Form();
                 vittoria.ShowDialog();
                 this.Close();
             }
-            if (contatore == 0)
+            if (contatore == 0 && gioco != 0)
             {
                 this.Hide();
                 Form perso = new Form();
