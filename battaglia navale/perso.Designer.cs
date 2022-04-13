@@ -29,10 +29,20 @@ namespace battaglia_navale
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // perso
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.ClientSize = new System.Drawing.Size(1094, 637);
+            this.ForeColor = System.Drawing.Color.Transparent;
+            this.Name = "perso";
             this.Text = "perso";
+            this.Load += new System.EventHandler(this.perso_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

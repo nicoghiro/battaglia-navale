@@ -112,7 +112,7 @@ namespace battaglia_navale
                         griglia[i, j].bottone.FlatStyle = FlatStyle.Flat;
                         griglia[i, j].bottone.FlatAppearance.BorderSize = 1;
                         griglia[i, j].bottone.FlatAppearance.BorderColor = Color.Aqua;
-                       griglia[i, j].fase = 0;
+                        griglia[i, j].fase = 0;
                         string cordx = Convert.ToString(i);
                         string cordy = Convert.ToString(j);
                         griglia[i, j].bottone.Name = i + "-" + j;
@@ -144,7 +144,7 @@ namespace battaglia_navale
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string vuota = null;
+            
             a = 0;
             //testo è la variabile appoggio per conversione
             string testo;
@@ -311,14 +311,14 @@ namespace battaglia_navale
             if (contatoreG == 0 && gioco != 0)
             {
                 this.Hide();
-                Form vittoria = new Form();
+                vittoria vittoria = new vittoria();
                 vittoria.ShowDialog();
                 this.Close();
             }
             if (contatore == 0 && gioco != 0)
             {
                 this.Hide();
-                Form perso = new Form();
+                perso perso = new perso();
                 perso.ShowDialog();
                 this.Close();
             }

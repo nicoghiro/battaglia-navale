@@ -19,7 +19,15 @@ namespace battaglia_navale
 
         private void vittoria_Load(object sender, EventArgs e)
         {
-
+            Vittoria(); 
+        }
+        public void Vittoria()
+        {
+            Label vittoria = new Label();
+            this.Controls.Add(vittoria);
+            vittoria.Location = new Point(500, 156);
+            vittoria.Text = "Congratulazioni! Hai vinto";
+            
         }
     }
 }

@@ -16,5 +16,10 @@ namespace battaglia_navale
         {
             InitializeComponent();
         }
+
+        private void perso_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
