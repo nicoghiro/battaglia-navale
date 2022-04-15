@@ -144,16 +144,19 @@ namespace battaglia_navale
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            int b;
             a = 0;
             //testo è la variabile appoggio per conversione
             string testo;
             testo = textBox1.Text;
             //conv è la variabile per trasformare in numero la dimensione inserita dall'utente (UwU)
             char[] conv = testo.ToCharArray();
-            if (textBox1.Text == "")
+            b = convertiVersoIntero(conv);
+            if (textBox1.Text == ""|| b==0)
             {
+                textBox1.Text = "";
                 throw new Exception("è necessario inserire un numero");
+                
             }
             else
             {
@@ -340,6 +343,19 @@ namespace battaglia_navale
                 throw new Exception("inserire almeno una barca");
             }
             }
+        public static int convertiVersoIntero(char[] stringa)
+        {
+            for (int i = 0; i < stringa.Length; i++)
+            {
+                int temp = ((int)stringa[i]);
+                if (temp - 48 > 9)
+                {
+                    return 0;
+                }
+            }
+          
+            return 1;
+        }
     }
 }
 
