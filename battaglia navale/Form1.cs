@@ -168,9 +168,10 @@ namespace battaglia_navale
                 {
                     a = (((int)conv[0] - 48) * 10) + (((int)conv[1] - 48)) + 1;
                 }
-                if (a > 27 || testo =="0")
+                if (a > 27 || 3>a)
                 {
-                    throw new Exception("il numero inserito deve essere minore di 27 e maggiore di 0");
+                    textBox1.Text = "";
+                    throw new Exception("il numero inserito deve essere minore di 27 e maggiore di 1");
                 }
 
                 else
@@ -206,7 +207,7 @@ namespace battaglia_navale
             
             Button button = sender as Button;
             for (int i = 1; i < a; i++)
-            {//ciao Uwu
+            {
                 for (int j = 1; j < a; j++)
                 {
 
