@@ -29,5 +29,10 @@ namespace battaglia_navale
             vittoria.Text = "Congratulazioni! Hai vinto";
             
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
