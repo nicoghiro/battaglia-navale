@@ -31,9 +31,9 @@ namespace battaglia_navale
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Location = new Point(835, 22);
+            label1.Location = new Point(665, 22);
             
-            label1.Text = "";
+            
             button2.Hide();
             
 
@@ -91,6 +91,7 @@ namespace battaglia_navale
                             else
                             {
                                 griglia[i, j].testo = new Label();
+                                
                                 this.Controls.Add(griglia[i, j].testo);
                                 griglia[i, j].testo.Location = new Point(x, y);
                                 griglia[i, j].testo.Size = new Size(35, 35);
@@ -181,12 +182,12 @@ namespace battaglia_navale
                 {
 
                     //giocatore è la stampa della griglia del giocatore (grigliaP)
-                    battaglione = creazione(a, "giocatore", 400, 170);
+                    battaglione = creazione(a, "giocatore", 350, 170);
                     //nemici è la stampa della griglia dei nemici (griglaN)
-                    nemico = creazione(a, "bot", 1200, 170);
+                    nemico = creazione(a, "bot", 1150, 170);
                     textBox1.Hide();
                     button1.Hide();
-                    
+                    label1.Location = new Point(730, 22);
                     label1.Text = "Scegli quante barche inserire";
 
 
@@ -345,7 +346,7 @@ namespace battaglia_navale
             if (contatore != 0) { 
                 gioco = 1;
                 button2.Hide();
-                label1.Location = new Point(780, 22);
+                label1.Location = new Point(550, 22);
                 label1.Text = "comincia la battaglia, scegli dove sganciare le bombe";
             }
             else
