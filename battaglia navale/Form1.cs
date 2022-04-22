@@ -111,7 +111,7 @@ namespace battaglia_navale
                         griglia[i, j].bottone.Size = new Size(35,35);
                         griglia[i, j].contaclick = 0;
                         griglia[i, j].bottone.BackColor = Color.Aquamarine;
-                        Bitmap b = new Bitmap(@"C:\Users\nicolas\OneDrive\Desktop\battaglia-navale\immagini\stock-vector-pixel-art-water-texture-for-game-platforms-vector-illustration-bit-sprite-1349125475 (1).jpg");
+                        Bitmap b = new Bitmap(@".\immagini\stock-vector-pixel-art-water-texture-for-game-platforms-vector-illustration-bit-sprite-1349125475 (1).jpg");
                         griglia[i, j].bottone.Image = b;
                         griglia[i, j].bottone.FlatStyle = FlatStyle.Flat;
                         griglia[i, j].bottone.FlatAppearance.BorderSize = 1;
@@ -135,7 +135,7 @@ namespace battaglia_navale
                 x = posx;
                 y = y + 35;
             }
-            button2.Show();
+          
             return griglia;
         }
 
@@ -189,7 +189,7 @@ namespace battaglia_navale
                     button1.Hide();
                     label1.Location = new Point(730, 22);
                     label1.Text = "Scegli quante barche inserire";
-
+                    button2.Show();
 
 
 
@@ -230,7 +230,7 @@ namespace battaglia_navale
                 
                 int crea = 0;
                 battaglione[salvax, salvay].fase = 1;
-                Bitmap b = new Bitmap(@"C:\Users\nicolas\OneDrive\Desktop\battaglia-navale\immagini\nave.jpg");
+                Bitmap b = new Bitmap(@".\immagini\nave.jpg");
                 battaglione[salvax, salvay].bottone.Image = b;
                 contatoreG++;
                 while (crea == 0)
@@ -280,14 +280,14 @@ namespace battaglia_navale
 
                 int crea = 0;
                 if(nemico[salvax, salvay].fase == 1) {
-                    Bitmap b = new Bitmap(@"C:\Users\nicolas\OneDrive\Desktop\battaglia-navale\immagini\esplosa.jpg");
+                    Bitmap b = new Bitmap(@".\immagini\esplosa.jpg");
                     nemico[salvax, salvay].bottone.Image = b;
                     nemico[salvax, salvay].fase = 2;
                 nemico[salvax, salvay].bottone.BackColor = Color.Black;
                 contatoreG--;}
                 else
                 {
-                    Bitmap b = new Bitmap(@"C:\Users\nicolas\OneDrive\Desktop\battaglia-navale\immagini\mancata.png");
+                    Bitmap b = new Bitmap(@".\immagini\mancata.png");
                     nemico[salvax, salvay].bottone.Image = b;
                 }
                 
@@ -301,7 +301,7 @@ namespace battaglia_navale
                         battaglione[navnemx, navnemy].contaclick++;
                         battaglione[navnemx, navnemy].fase = 3;
                         crea = crea + 1;
-                          Bitmap b = new Bitmap(@"C:\Users\nicolas\OneDrive\Desktop\battaglia-navale\immagini\mancata.png");
+                          Bitmap b = new Bitmap(@".\immagini\mancata.png");
                         battaglione[navnemx, navnemy].bottone.Image = b;
                     }
                     if (battaglione[navnemx, navnemy].fase == 1)
@@ -309,7 +309,7 @@ namespace battaglia_navale
                         battaglione[navnemx, navnemy].contaclick++;
                         battaglione[navnemx, navnemy].fase = 2;
                         crea = crea + 1;
-                        Bitmap b = new Bitmap(@"C:\Users\nicolas\OneDrive\Desktop\battaglia-navale\immagini\esplosa.jpg");
+                        Bitmap b = new Bitmap(@".\immagini\esplosa.jpg");
                         battaglione[navnemx, navnemy].bottone.Image = b;
                         contatore--;
                     }
