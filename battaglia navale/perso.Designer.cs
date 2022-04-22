@@ -38,24 +38,25 @@ namespace battaglia_navale
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(448, 130);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(336, 106);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(499, 320);
+            this.pictureBox1.Size = new System.Drawing.Size(374, 219);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // perso
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1196, 784);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(1130, 637);
             this.Controls.Add(this.pictureBox1);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.Transparent;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "perso";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "perso";
             this.Load += new System.EventHandler(this.perso_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
