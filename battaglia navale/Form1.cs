@@ -48,13 +48,13 @@ namespace battaglia_navale
             if(player == "giocatore") { 
             Label GIOCATORE = new Label();
             this.Controls.Add(GIOCATORE);
-            GIOCATORE.Location = new Point(x + (15 * (grandezza / 2) + 80), y - 35);
+            GIOCATORE.Location = new Point(x + (30 * (grandezza / 2) ), y - 35);
             GIOCATORE.Text = "GIOCATORE";
             }
             if(player == "bot") {
                     Label bot = new Label();
                     this.Controls.Add(bot);
-                    bot.Location = new Point(x + (15 * (grandezza / 2) + 100), y - 35);
+                    bot.Location = new Point(x + (30 * (grandezza / 2)+30), y - 35);
                     bot.Text = "NEMICO";
                 }
             for (int i=0;i < grandezza; i++) {
@@ -179,11 +179,12 @@ namespace battaglia_navale
 
                 else
                 {
-                    int location = 350 - 13 * a;
+                    int locationx = 350 - 13 * a;
+                    int locationy = 361-10*a;
                     //giocatore è la stampa della griglia del giocatore (grigliaP)
-                    battaglione = creazione(a, "giocatore", location, 100);
+                    battaglione = creazione(a, "giocatore", locationx, locationy);
                     //nemici è la stampa della griglia dei nemici (griglaN)
-                    nemico = creazione(a, "bot", location+950, 100);
+                    nemico = creazione(a, "bot", locationx+950, locationy);
                     textBox1.Hide();
                     button1.Hide();
                     label1.Location = new Point(730, 22);
