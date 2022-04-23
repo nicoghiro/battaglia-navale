@@ -180,11 +180,11 @@ namespace battaglia_navale
 
                 else
                 {
-
+                    int location = 350 - 13 * a;
                     //giocatore è la stampa della griglia del giocatore (grigliaP)
-                    battaglione = creazione(a, "giocatore", 350, 170);
+                    battaglione = creazione(a, "giocatore", location, 100);
                     //nemici è la stampa della griglia dei nemici (griglaN)
-                    nemico = creazione(a, "bot", 1150, 170);
+                    nemico = creazione(a, "bot", location+950, 100);
                     textBox1.Hide();
                     button1.Hide();
                     label1.Location = new Point(730, 22);
