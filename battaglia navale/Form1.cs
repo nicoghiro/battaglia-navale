@@ -45,12 +45,14 @@ namespace battaglia_navale
             char lab = '@';
             int x = posx, y = posy;
             nave[,] griglia = new nave[grandezza, grandezza];
+            //creazione matrice giocatore
             if(player == "giocatore") { 
             Label GIOCATORE = new Label();
             this.Controls.Add(GIOCATORE);
             GIOCATORE.Location = new Point(x + (30 * (grandezza / 2) ), y - 35);
             GIOCATORE.Text = "GIOCATORE";
             }
+            //generazione matrice CPU
             if(player == "bot") {
                     Label bot = new Label();
                     this.Controls.Add(bot);
@@ -59,10 +61,12 @@ namespace battaglia_navale
                 }
             for (int i=0;i < grandezza; i++) {
                 for (int j = 0; j < grandezza; j++) {
+                    //creazione tabelle in generale con nomi caselle e bottoni, in base alla posizione in cui si trovano
                     if (i == 0 || j == 0)
                     {
                         if (i == 0)
                         {
+                            //numeri e lettere sopra le caselle
                             if (i == 0 && j == 0)
                             {
                                 x = x + 40;
@@ -70,6 +74,7 @@ namespace battaglia_navale
                             }
                             else
                             {
+                                
                                 griglia[i, j].testo = new Label();
                                 this.Controls.Add(griglia[i, j].testo);
                                 griglia[i, j].testo.Location = new Point(x, y);
@@ -84,18 +89,15 @@ namespace battaglia_navale
                         }
                         if (j == 0)
                         {
-                            if (i == 0 && j == 0)
-                            {
-
-                            }
-                            else
+                            //numeri e lettere accanto le caselle
+                            if (i != 0 && j == 0)
                             {
                                 griglia[i, j].testo = new Label();
                                 
                                 this.Controls.Add(griglia[i, j].testo);
                                 griglia[i, j].testo.Location = new Point(x, y);
                                 griglia[i, j].testo.Size = new Size(35, 35);
-                                string vert = Convert.ToString(i );
+                                string vert = Convert.ToString(i);
                                 griglia[i, j].testo.Text = vert;
 
                                 x = x + 35;
@@ -105,6 +107,7 @@ namespace battaglia_navale
                     }
                     else
                     {
+                        //creazione pulsanti appartenenti alla matrice
                         griglia[i, j].bottone = new Button();
                         this.Controls.Add(griglia[i, j].bottone);
                         griglia[i, j].bottone.Location = new Point(x, y);
@@ -141,7 +144,7 @@ namespace battaglia_navale
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //uddfh
+            //non serve a nulla
             
         }
 
@@ -152,9 +155,10 @@ namespace battaglia_navale
             //testo è la variabile appoggio per conversione
             string testo;
             testo = textBox1.Text;
-            //conv è la variabile per trasformare in numero la dimensione inserita dall'utente (UwU)
+            //conv è la variabile per trasformare in numero la dimensione inserita dall'utente 
             char[] conv = testo.ToCharArray();
             b = convertiVersoIntero(conv);
+            //gestione eccezioni di grandezza della tabella
             if (textBox1.Text == ""|| b==0)
             {
                 textBox1.Text = "";
@@ -171,10 +175,10 @@ namespace battaglia_navale
                 {
                     a = (((int)conv[0] - 48) * 10) + (((int)conv[1] - 48)) + 1;
                 }
-                if (a > 27 || 3>a)
+                if (a > 26 || 3>a)
                 {
                     textBox1.Text = "";
-                    throw new Exception("il numero inserito deve essere minore di 27 e maggiore di 1");
+                    throw new Exception("il numero inserito deve essere minore di 26 e maggiore di 1");
                 }
 
                 else
@@ -202,7 +206,7 @@ namespace battaglia_navale
         {
            
         }
-       
+       //funzione di posizionamento navi 
         public void buttonp_Click(object sender, EventArgs e)
         {
             
@@ -251,6 +255,7 @@ namespace battaglia_navale
             }
 
         }
+        //funzione di identificazione per le navi cpu
         public void buttonn_Click(object sender, EventArgs e)
         {
             int salvax = 0;
@@ -273,11 +278,12 @@ namespace battaglia_navale
                 }
 
             }
+            //fase di attacco navi
             if (gioco == 1 && nemico[salvax, salvay].fase == 1 || gioco == 1 && nemico[salvax, salvay].fase == 0 && nemico[salvax, salvay].contaclick < 1)
             {
                 nemico[salvax, salvay].contaclick++;
 
-
+                //tentativo giocatore
                 int crea = 0;
                 if(nemico[salvax, salvay].fase == 1) {
                     Bitmap b = new Bitmap(@".\immagini\esplosa.jpg");
@@ -290,7 +296,7 @@ namespace battaglia_navale
                     Bitmap b = new Bitmap(@".\immagini\mancata.png");
                     nemico[salvax, salvay].bottone.Image = b;
                 }
-                
+                //tentativo nemico
                 while (crea == 0)
                 {
                     int y = a + 1;
@@ -309,6 +315,7 @@ namespace battaglia_navale
                         battaglione[navnemx, navnemy].contaclick++;
                         battaglione[navnemx, navnemy].fase = 2;
                         crea = crea + 1;
+                        //biegropatelli
                         Bitmap b = new Bitmap(@".\immagini\esplosa.jpg");
                         battaglione[navnemx, navnemy].bottone.Image = b;
                         contatore--;
@@ -339,7 +346,7 @@ namespace battaglia_navale
         }
 
 
-        //UwUwUwUwUwU
+        //stampa scritta inizio battaglia, e successivamente gioco diventa 1 per indicare che inizia la battaglia
             private void button2_Click_1(object sender, EventArgs e)
             {
 
