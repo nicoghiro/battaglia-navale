@@ -210,25 +210,13 @@ namespace battaglia_navale
         public void buttonp_Click(object sender, EventArgs e)
         {
             
-            int salvax=0;
-            int salvay=0;
+            
             
             Button button = sender as Button;
-            for (int i = 1; i < a; i++)
-            {
-                for (int j = 1; j < a; j++)
-                {
-
-                    if (button.Name == battaglione[i, j].bottone.Name)
-                    {
-                        
-                        salvax =i;
-                        salvay = j;
-
-                    }
-                }
-            
-            }
+            int[] trovato = Identifica(battaglione, button, a);
+            int salvax = trovato[0];
+            int salvay = trovato[1];
+         
             if (gioco <1 && battaglione[salvax, salvay].fase == 0)
             {
                 
@@ -258,26 +246,10 @@ namespace battaglia_navale
         //funzione di identificazione per le navi cpu
         public void buttonn_Click(object sender, EventArgs e)
         {
-            int salvax = 0;
-            int salvay = 0;
-
             Button button = sender as Button;
-            for (int i = 1; i < a; i++)
-            {
-                for (int j = 1; j < a; j++)
-                {
-
-                    if (button.Name == nemico[i, j].bottone.Name)
-                    {
-                        salvax = i;
-                        salvay = j;
-                        
-                        
-
-                    }
-                }
-
-            }
+            int[] trovato = Identifica(nemico, button, a);
+            int salvax = trovato[0];
+            int salvay = trovato[1];
             //fase di attacco navi
             if (gioco == 1 && nemico[salvax, salvay].fase == 1 || gioco == 1 && nemico[salvax, salvay].fase == 0 && nemico[salvax, salvay].contaclick < 1)
             {
@@ -373,6 +345,29 @@ namespace battaglia_navale
             }
           
             return 1;
+        }
+        public static int[] Identifica(nave[,] battaglione, Button button, int a)
+        {
+            int[] identifica = new int[2];
+
+
+            for (int i = 1; i < a; i++)
+            {
+                for (int j = 1; j < a; j++)
+                {
+
+                    if (button.Name == battaglione[i, j].bottone.Name)
+                    {
+                        identifica[0] = i;
+                        identifica[1] = j;
+
+                        return identifica;
+
+                    }
+                }
+
+            }
+            return identifica;
         }
     }
 }
